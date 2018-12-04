@@ -45,3 +45,16 @@ venv.bak/
 # Mine
 .png
 .txt
+Inputs/
+Outputs/
+PyAutoGui.txt
+TxtOperator.py
+next-jt.png
+next-zq.png
+next-zq2.png
+ok-jt.png
+ok-zq.png
+todolist.png
+txtWrite.txt
+up-jt.png
+up-zq.png
