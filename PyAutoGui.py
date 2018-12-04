@@ -1,4 +1,4 @@
-import pyautogui, time, pyperclip
+import pyautogui, time, pyperclip, TxtOperator
 
 pyautogui.FAILSAFE = True
 pyautogui.PAUSE = 0.5
@@ -44,8 +44,8 @@ print(screenWidth,screenHeight)
 num = pyautogui.prompt(text='请复制处理意见，确保IE为活动窗口，确保有一个空白记事本在身边！', title='已阅！' , default='已阅。')
 num = int(num)
 
-# 待办第一条的位置坐标
-tempPn = 6
+# 待办第一条的位置坐标，默认为第1条，如果第1条处理有问题，可通过下面变量进行调整。待办之前相差32像素。
+tempPn = 0
 pointOne = (95, 268+32*tempPn)
 
 tTodo = 0.5
@@ -64,13 +64,18 @@ for i in range(num):
     # 政企点击的坐标序列：处理，已阅，结束，提交，确认
     pointDeals = ((181, 105), (604, 385), (789, 333), (714, 574), (670, 448))
 
+    # 查找待办列表
     x, y, w, tTodo = locateCenterOnScreenWithTime(['todolist.png'], tTodo)
     pyautogui.press('f5')
+    # 刷新之后再次查找，如果直接点击/设置固定等待时间都会导致页面未刷新完成而提前点击
     x, y, w, tTodo = locateCenterOnScreenWithTime(['todolist.png'], tTodo)
+
+    # 如果无法找到待办，弹窗退出程序
     if x==-1:
         pyautogui.alert(text='No Back', title='Error', button='OK')
         print("Not Back", 300, 180)
         break
+
     print('tTodo=', tTodo)
     pyautogui.click(pointOne)
     # pyautogui.click(pointOne,duration=1)
@@ -107,9 +112,10 @@ for i in range(num):
         # pyautogui.moveTo(x=screenWidth, duration=20)
     # 集团处理方法
     elif(which==2):
-        tempPn +=1
-        pyautogui.hotkey('ctrl', 'w')
-        continue
+        # 如果集团都无法处理，可临时使用下面代码，通过调整点击待办的位置跳过集团。
+        # tempPn +=1
+        # pyautogui.hotkey('ctrl', 'w')
+        # continue
         # 集团点击的坐标序列：处理，已阅，结束，提交，确认
         pointDeals = ((181, 105), (604, 385), (930, 228), (657, 621), (653, 260))
         pyautogui.click(x,y)
