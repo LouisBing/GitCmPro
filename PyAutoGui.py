@@ -144,6 +144,6 @@ for i in range(num):
 
     timeList = 'tTodo=%.2f,tN=%.2f,tUp=%.2f,tUpJt=%.2f' % (tTodo, tN, tUp, tUpJt)
     print(timeList)
-    writeFile = 'PyAutoGui.txt'
+    writeFile = 'Outputs\PyAutoGui.txt'
     TxtOperator.writeList2Txt(writeFile, [timeList], 'a')
 
