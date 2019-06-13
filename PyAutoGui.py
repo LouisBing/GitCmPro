@@ -13,11 +13,13 @@ def locateCenterOnScreenWithTime(images,wait):
     # v3.0：以次数为中心；循环20次（20次机会），i意义为次数减1，i和次数不统一；不再需要add；最终时间为+最大次数*0.5
     for i in range(0,20):
         for im, image in enumerate(images):
-            if (pyautogui.locateCenterOnScreen(image,grayscale=True)):
+            try:
+                pyautogui.locateCenterOnScreen(image,grayscale=True)
                 x, y = pyautogui.locateCenterOnScreen(image,grayscale=True)
                 return x, y, im, wait + i * sl
-                break
-        time.sleep(sl)
+            except:
+                print('Err:locateCenterOnScreen')
+                time.sleep(sl)
     return -1, -1, -1, wait + 20 * sl
 
 screenWidth, screenHeight = pyautogui.size()
@@ -53,6 +55,8 @@ tN = 0.5
 tUp = 0.5
 tUpJt = 0.5
 READ = '已阅。'
+
+# github
 
 for i in range(num):
     # 检测是否返回待办页面，如没有直接终止。
@@ -147,3 +151,4 @@ for i in range(num):
     writeFile = 'Outputs\PyAutoGui.txt'
     TxtOperator.writeList2Txt(writeFile, [timeList], 'a')
 
+# github
