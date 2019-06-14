@@ -10,7 +10,6 @@ Inputs/
 Outputs/
 *.png
 *.txt
-*.ico
 #------------------------------------------------------------------------------------------
 ### Python template
 # Byte-compiled / optimized / DLL files
